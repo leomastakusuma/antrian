@@ -61,11 +61,11 @@
 				}
 				if (tmp_loket==0) {
 					for (var i = 1; i<= data['jumlah_loket']; i++) {
-						loket = '<div class="col-md-3">'+
+						loket = '<div class="col-md-6">'+
 									'<div class="'+ i +
 									 ' jumbotron" style="padding-top:20px;padding-bottom:20px;">'+
 										'<h1> '+data["init_counter"][i]+' </h1>'+
-										'<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-credit-card">&nbsp;</span>LOKET '+ i +'</button>'+
+										'<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-credit-card">&nbsp;</span>KONTER '+ i +'</button>'+
 									'</div>'+
 								'</div>';
 						$(".loket").append(loket);
