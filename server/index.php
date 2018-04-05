@@ -11,11 +11,16 @@
 	    <link href="../assert/css/jumbotron-narrow-monitoring.css" rel="stylesheet">
 		<script src="../assert/js/jquery.min.js"></script>
 	</head>
+	<style>
+	 #myVideo{
+		height: 440px;
+	 }
+	</style>
   	<body>
     <div class="container">
     	<center>
 	    	<div class="blog-header">
-			    <img src="../assert/img/bni.png" width="300px;" style="margin: 10px;">
+			    <img src="../assert/img/logo-antrian.png" height="100px;" style="margin: 10px;">
 				<marquee behavior="alternate"><h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;"><b>Selamat di Bank BNI</b></h3>  </marquee>
 		    </div>
 	    </center>
@@ -29,8 +34,15 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-8">
-				<div style="padding-top:10px;margin-left:80px;min-height:450px;max-width:950px;padding-bottom:10px;background-image:url(iklan1.png);background-size:cover;background-color:grey">
+			<div class="col-md-8 iklanku">
+				<div
+				style="padding-top:10px;
+				margin-left:80px;
+				min-height:450px;
+				max-width:950px;
+				padding-bottom:10px;
+				background-size:cover;
+				background-color:grey"></div>
 			</div>
       	</div>
       	<div class="row col-lg-12 loket vertical-center">
@@ -69,8 +81,10 @@
     </div>
   	</body>
   	<script type="text/javascript">
+	  var index_iklan=0;
+		var data_iklan=[];
 	$("document").ready(function(){
-		var index_ads=0;
+		
 		var tmp_loket=0;
 		setInterval(function() {
 			$.post("../apps/monitoring-daemon.php", function( data ){
@@ -80,7 +94,7 @@
 				}
 				if (tmp_loket==0) {
 					for (var i = 1; i<= data['jumlah_loket']; i++) {
-						loket = '<div class="col-md-1">'+
+						loket = '<div class="col-md-2">'+
 									'<div class="'+ i +
 									 ' jumbotron" style="padding-top:10px;padding-bottom:10px;border-radius: 0px;border-top-left-radius: 6px;border-top-right-radius: 6px;margin-bottom:0px">'+
 										'<h1 style="font-size: 50px;font-weight: bold;"> '+data["init_counter"][i]+' </h1>'+
@@ -118,6 +132,23 @@
 			}, "json"); 
 		}, 1000);
 		//change
+		$.ajax({
+			url: "../apps/get_iklan.php",
+			})
+			.done(function(data) {
+				try {
+					data_iklan = JSON.parse(data);
+					index_iklan = 0;
+					reload_iklan();
+				} catch (error) {
+					
+				}
+			}
+		);
+		setInterval(function(){
+			reload_iklan();
+		},1000*5);
+		
 	});
 	
 	function mulai(urut, loket){
@@ -705,6 +736,45 @@
 			}, 'json');
 		}, totalwaktu);
 		totalwaktu=totalwaktu+1000;
+	}
+	function reload_iklan (){
+		var dt;
+		if(index_iklan < data_iklan.length){
+			dt = data_iklan[index_iklan];
+			index_iklan++;
+		}
+		else{
+			index_iklan =0;
+			dt = data_iklan[index_iklan];
+		}
+		var content ="";
+		if(dt.type =="1"){
+			content ='<div '+
+				' style="padding-top:10px;'+
+				' margin-left:80px;'+
+				' min-height:450px;'+
+				' max-width:950px;'+
+				' padding-bottom:10px;'+
+				' background-image:url(\''+dt.url+'\');'+
+				' background-size:cover;'+
+				' background-color:grey"></div>';
+		}
+		else{
+			content='<div '+
+				' style="padding-top:10px;'+
+				' margin-left:80px;'+
+				' max-height:450px;'+
+				' max-width:950px;'+
+				' padding-bottom:10px;'+
+				' background-size:cover;">'+
+					"<video autoplay muted loop id='myVideo'> "+
+							'<source src="'+dt.url+'" type="video/mp4">'+
+							'Your browser does not support HTML5 video.'+
+							"</video>"+
+							'</div>';
+		}
+		$(".iklanku").html(content);
+
 	}
 	</script>
 </html>
