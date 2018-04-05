@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			<div class="col-md-8">
-				<div style="padding-top:10px;margin-left:80px;min-height:450px;max-width:950px;padding-bottom:10px;background-image:url(iklan1.png);background-size:cover">
+				<div style="padding-top:10px;margin-left:80px;min-height:450px;max-width:950px;padding-bottom:10px;background-image:url(iklan1.png);background-size:cover;background-color:grey">
 			</div>
       	</div>
       	<div class="row col-lg-12 loket vertical-center">

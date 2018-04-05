@@ -1,102 +1,112 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: 25 Mei 2016 pada 03.41
--- Versi Server: 10.1.8-MariaDB
--- PHP Version: 5.6.14
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4541
+#
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# Host: 127.0.0.1 (MySQL 5.7.20)
+# Database: antrian
+# Generation Time: 2018-04-05 07:11:14 +0000
+# ************************************************************
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Database: `antrian`
---
 
--- --------------------------------------------------------
+# Dump of table client_antrian
+# ------------------------------------------------------------
 
---
--- Struktur dari tabel `client_antrian`
---
+DROP TABLE IF EXISTS `client_antrian`;
 
 CREATE TABLE `client_antrian` (
   `id` int(11) NOT NULL,
   `client` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `client_antrian`
---
+LOCK TABLES `client_antrian` WRITE;
+/*!40000 ALTER TABLE `client_antrian` DISABLE KEYS */;
 
-INSERT INTO `client_antrian` (`id`, `client`) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4)
+INSERT INTO `client_antrian` (`id`, `client`)
+VALUES
+	(1,1),
+	(2,2),
+	(3,3),
+	(4,4),
+	(5,5),
+	(6,6),
+	(7,7),
+	(8,8),
+	(9,9);
+
+/*!40000 ALTER TABLE `client_antrian` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
--- --------------------------------------------------------
+# Dump of table data_antrian
+# ------------------------------------------------------------
 
---
--- Struktur dari tabel `data_antrian`
---
+DROP TABLE IF EXISTS `data_antrian`;
 
 CREATE TABLE `data_antrian` (
-  `id` int(11) NOT NULL,
+  `id` varchar(11) NOT NULL DEFAULT '',
   `counter` int(11) NOT NULL,
   `waktu` text NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `data_antrian`
---
+LOCK TABLES `data_antrian` WRITE;
+/*!40000 ALTER TABLE `data_antrian` DISABLE KEYS */;
 
-INSERT INTO `data_antrian` (`id`, `counter`, `waktu`, `status`) VALUES
-(1, 0, '2016-05-24 10:44:00', 3),
-(2, 0, '2016-05-24 10:43:55', 3),
-(3, 0, '2016-05-24 10:44:10', 3),
-(4, 0, '2016-05-24 10:44:22', 3),
-(5, 0, '2016-05-24 10:44:28', 3),
+INSERT INTO `data_antrian` (`id`, `counter`, `waktu`, `status`)
+VALUES
+	('4',2,'',2),
+	('2',1,'',2),
+	('5',3,'',2),
+	('6',4,'',2),
+	('7',3,'',2),
+	('10',1,'',2);
+
+/*!40000 ALTER TABLE `data_antrian` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
---
--- Indexes for dumped tables
---
+# Dump of table data_images
+# ------------------------------------------------------------
 
---
--- Indexes for table `client_antrian`
---
-ALTER TABLE `client_antrian`
-  ADD PRIMARY KEY (`id`);
+DROP TABLE IF EXISTS `data_images`;
 
---
--- Indexes for table `data_antrian`
---
-ALTER TABLE `data_antrian`
-  ADD PRIMARY KEY (`id`);
+CREATE TABLE `data_images` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1=image,2=video',
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `url` varchar(255) NOT NULL DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- AUTO_INCREMENT for dumped tables
---
+LOCK TABLES `data_images` WRITE;
+/*!40000 ALTER TABLE `data_images` DISABLE KEYS */;
 
---
--- AUTO_INCREMENT for table `client_antrian`
---
-ALTER TABLE `client_antrian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
---
--- AUTO_INCREMENT for table `data_antrian`
---
-ALTER TABLE `data_antrian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
+INSERT INTO `data_images` (`id`, `type`, `description`, `url`, `status`)
+VALUES
+	(1,1,'Image iphone','iklan1.png',1),
+	(2,1,'asdasd sd','iklan2.png',2);
+
+/*!40000 ALTER TABLE `data_images` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
