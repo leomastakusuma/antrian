@@ -38,7 +38,8 @@ CREATE TABLE `client_antrian` (
 INSERT INTO `client_antrian` (`id`, `client`) VALUES
 (1, 1),
 (2, 2),
-(3, 3)
+(3, 3),
+(4, 4)
 
 
 -- --------------------------------------------------------
