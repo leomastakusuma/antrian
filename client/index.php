@@ -129,7 +129,7 @@
 							clearInterval(timerId_adik);
 							adik_adudu(loket, data["next"]);
 						}
-						window.location.href=window.location.href;
+						// window.location.href=window.location.href;
 					}
 				});
 				return false;

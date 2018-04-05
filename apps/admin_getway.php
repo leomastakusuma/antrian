@@ -1,25 +1,20 @@
 <?php
 	include "mysql_connect.php";
 	$current = !empty($_POST) ? $_POST : '';
-	$rstClient = $mysqli->query('SELECT count(*) as count FROM data_antrian');
+	$rstClient = $mysqli->query('SELECT count(*) as count FROM data_antrian where type="A"');
 	$rowClient = $rstClient->fetch_array();
-	$jmlClient = 0;
+    $jmlClient = 1;
 
 	if($rowClient['count']>0){
-		$jmlClient = $rowClient['count'];
+		$jmlClient = $rowClient['count'] + 1;
 	}
 
 
 	if(!empty($_POST)){
-		$jml = $jmlClient+1;
-		$results = $mysqli->query("INSERT INTO data_antrian (id,waktu,counter,status) VALUES (".$jml.",'','0',3)");
-		die($results);
+		$results = $mysqli->query("INSERT INTO data_antrian (id,waktu,counter,status,type) VALUES (".$jmlClient.",'','0',3,'A')");
+		$jmlClient = $jmlClient+1;
+
 	}
-
-
-
-
-
 	echo json_encode( array('next'=> $jmlClient) );
 	include 'mysql_close.php';
-    
+ ?>   

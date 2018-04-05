@@ -24,9 +24,26 @@
 	        <h1 class="next">
 	        	<span class="glyphicon glyphicon-book"></span>
 	        </h1>
-        	<button type="button" class="btn btn-primary next_getway">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+        	<button type="button" class="btn btn-primary next_getway">Next CS <span class="glyphicon glyphicon-chevron-right"></span></button>
 	      	</div>
     	</form>
+		<form>
+    		<div class="jumbotron">
+	        <h1 class="next-tabungan">
+	        	<span class="glyphicon glyphicon-book"></span>
+	        </h1>
+        	<button type="button" class="btn btn-primary next_getway_tabungan">Next Tabungan <span class="glyphicon glyphicon-chevron-right"></span></button>
+	      	</div>
+    	</form>
+    	<form>
+    		<div class="jumbotron">
+	        <h1 class="next-kredit">
+	        	<span class="glyphicon glyphicon-book"></span>
+	        </h1>
+        	<button type="button" class="btn btn-primary next_getway_kredit">Next Kredit <span class="glyphicon glyphicon-chevron-right"></span></button>
+	      	</div>
+    	</form>
+    
     	<br/>
       	<footer class="footer">
         <p>&copy; Antrian <?php echo date("Y");?></p>
@@ -40,13 +57,29 @@
 	    $.post( "../apps/admin_getway.php", function( data ) {
 			$(".next").html(data['next']);
 		},"json");
-		
+	    $.post( "../apps/admin_getway_conter_b.php", function( datatabungan ) {
+			$(".next-tabungan").html(datatabungan['next']);
+		},"json");
+	    $.post( "../apps/admin_getway_conter_c.php", function( datakredit ) {
+			$(".next-kredit").html(datakredit['next']);
+		},"json");
 	    // RESET 
 		$(".next_getway").click(function(){
 			var next_current = $(".next").text();
 			$.post( "../apps/admin_getway.php", {"next_current": next_current}, function( data ) {
 				$(".next").html(data['next']);
-				window.location.href=window.location.href;
+			},"json");
+		});
+		$(".next_getway_tabungan").click(function(){
+			var next_current = $(".next").text();
+			$.post( "../apps/admin_getway_conter_b.php", {"next_current": next_current}, function( data ) {
+				$(".next-tabungan").html(data['next']);
+			},"json");
+		});
+		$(".next_getway_kredit").click(function(){
+			var next_current = $(".next").text();
+			$.post( "../apps/admin_getway_conter_c.php", {"next_current": next_current}, function( data ) {
+				$(".next-kredit").html(data['next']);
 			},"json");
 		});
 
