@@ -739,6 +739,9 @@
 	}
 	function reload_iklan (){
 		var dt;
+		if(data_iklan.length ==0){
+			return;
+		}
 		if(index_iklan < data_iklan.length){
 			dt = data_iklan[index_iklan];
 			index_iklan++;
