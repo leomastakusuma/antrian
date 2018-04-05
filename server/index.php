@@ -15,11 +15,27 @@
     <div class="container">
     	<center>
 	    	<div class="blog-header">
-			    <img src="../assert/img/logo.png" width="100px;" style="margin: 100px;">
+			    <img src="../assert/img/bni.png" width="300px;" style="margin: 10px;">
 				<marquee behavior="alternate"><h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;"><b>Selamat di Bank BNI</b></h3>  </marquee>
 		    </div>
 	    </center>
-      	<div class="row loket" style="align:center">
+		<div class="row col-lg-12 vertical-center">
+			<div class="col-md-4">
+				<div class="panel text-center panel-default panel-flat" style="min-height:450px">
+					<div class="panel-heading"><h1>NOMOR ANTRIAN</h1></div>
+					<div class="panel-body" style="padding-top:10px;padding-bottom:10px;">
+						<h1 class="nomor_urut" style="font-size: 120px;font-weight: bold;">--</h1>
+						<h1 class="nomor_counter" style="font-size: 60px;font-weight: bold;">--</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div style="padding-top:10px;margin-left:80px;min-height:450px;max-width:950px;padding-bottom:10px;background-image:url(iklan1.png);background-size:cover">
+			</div>
+      	</div>
+      	<div class="row col-lg-12 loket vertical-center">
+		  <!-- <div class="col-md-1"></div>
+		  <div class="col-md-1"></div> -->
       	</div>
 	    <div class="audio">
 		  	<audio id="in" src="../audio/new/in.wav"></audio>
@@ -45,13 +61,16 @@
 			<audio id="suarabelloket10" src="../audio/new/sepuluh.MP3"></audio> 
 			<audio id="loket" src="../audio/new/konter.MP3"></audio> 
        	</div>
-		<footer class="footer">
-			<center><p>&copy; Test <?php echo date("Y");?></p></center>
-		</footer> 
+		<div class="col-lg-12" style="margin-top:20px">
+			<footer class="footer">
+				<center><p>&copy; Test <?php echo date("Y");?></p></center>
+			</footer> 
+		</div>
     </div>
   	</body>
   	<script type="text/javascript">
 	$("document").ready(function(){
+		var index_ads=0;
 		var tmp_loket=0;
 		setInterval(function() {
 			$.post("../apps/monitoring-daemon.php", function( data ){
@@ -61,12 +80,12 @@
 				}
 				if (tmp_loket==0) {
 					for (var i = 1; i<= data['jumlah_loket']; i++) {
-						loket = '<div class="col-md-6">'+
+						loket = '<div class="col-md-1">'+
 									'<div class="'+ i +
-									 ' jumbotron" style="padding-top:20px;padding-bottom:20px;">'+
-										'<h1> '+data["init_counter"][i]+' </h1>'+
-										'<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-credit-card">&nbsp;</span>KONTER '+ i +'</button>'+
+									 ' jumbotron" style="padding-top:10px;padding-bottom:10px;border-radius: 0px;border-top-left-radius: 6px;border-top-right-radius: 6px;margin-bottom:0px">'+
+										'<h1 style="font-size: 50px;font-weight: bold;"> '+data["init_counter"][i]+' </h1>'+
 									'</div>'+
+									'<button class="btn btn-danger" type="button" style="font-size: 12px;padding:5px;margin:0px;width:100%;border-radius:0px"><span class="glyphicon glyphicon-credit-card">&nbsp;</span>KONTER '+ i +'</button>'+									
 								'</div>';
 						$(".loket").append(loket);
 					}
@@ -80,9 +99,13 @@
 				}
 				if (data["next"]) {
 					var angka = data["next"];
+					$(".nomor_urut").text(angka);
+					$(".nomor_counter").text("KONTER "+data["counter"]);
 					for (var i = 0 ; i < angka.toString().length; i++) {
 						$(".audio").append('<audio id="suarabel'+i+'" src="../audio/new/'+angka.toString().substr(i,1)+'.MP3" ></audio>');
+						
 					};
+					
 					mulai(data["next"],data["counter"]);
 				}else{
 					for (var i = 1; i <= data['jumlah_loket']; i++) { 					
